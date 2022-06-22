@@ -1,3 +1,5 @@
+import System.IO
+
 isPalindrome :: String -> Bool
 isPalindrome word =
     word == reverse word
@@ -17,5 +19,7 @@ verbose word
 
 main :: IO ()
 main = do
+    putStr "Give me a word: "
+    hFlush stdout
     word <- getLine
     print $ verbose word
