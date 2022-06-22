@@ -12,18 +12,18 @@ nonemptyPal word =
         _  -> Just $ isPalindrome word
 
 verbose :: String -> String
-verbose word
-    | isNothing a     = "We need some input."
-    | a == Just True  = "W00T! Palindromitic effect in play!"
-    | a == Just False = "Nice string, but it's not a palindrome."
-    where a = nonemptyPal word
-
-verbose' :: String -> String
-verbose' word =
+verbose word =
     case nonemptyPal word of
         Nothing    -> "Please enter a word."
         Just False -> "Sorry, this is not a palindrome."
         Just True  -> "Yay, it's a palindrome!"
+
+verbose' :: String -> String
+verbose' word
+    | isNothing a     = "We need some input."
+    | a == Just True  = "W00T! Palindromitic effect in play!"
+    | a == Just False = "Nice string, but it's not a palindrome."
+    where a = nonemptyPal word
 
 main :: IO ()
 main = do
