@@ -1,3 +1,4 @@
+import Data.Char  ( toLower )
 import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
@@ -24,6 +25,28 @@ verbose' word
     | a == Just True  = "W00T! Palindromitic effect in play!"
     | a == Just False = "Nice string, but it's not a palindrome."
     where a = nonemptyPal word
+
+allLowerCase :: String -> String
+allLowerCase = myMap toLower
+
+myMap :: (a -> a) -> [a] -> [a]
+myMap func list =
+    case list of
+        [] -> []
+        (first : rest) -> func first : myMap func rest
+
+myHead :: [a] -> a
+myHead (first : rest) = first
+
+myTail :: [a] -> [a]
+myTail xs =
+    case xs of
+        []             -> []
+        (first : rest) -> rest
+
+isPalindromeIgnoringCase :: String -> Bool
+isPalindromeIgnoringCase word =
+    isPalindrome $ allLowerCase word
 
 main :: IO ()
 main = do
