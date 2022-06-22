@@ -18,6 +18,13 @@ verbose word
     | a == Just False = "Nice string, but it's not a palindrome."
     where a = nonemptyPal word
 
+verbose' :: String -> String
+verbose' word =
+    case nonemptyPal word of
+        Nothing    -> "Please enter a word."
+        Just False -> "Sorry, this is not a palindrome."
+        Just True  -> "Yay, it's a palindrome!"
+
 main :: IO ()
 main = do
     putStr "Give me a word: "
