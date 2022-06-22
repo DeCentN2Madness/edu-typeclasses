@@ -1,5 +1,5 @@
 import Data.Maybe ( isNothing )
-import System.IO
+import System.IO  ( hFlush, stdout )
 
 isPalindrome :: String -> Bool
 isPalindrome word =
