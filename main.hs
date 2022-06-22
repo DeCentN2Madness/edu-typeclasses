@@ -1,3 +1,4 @@
+import Data.Maybe ( isNothing )
 import System.IO
 
 isPalindrome :: String -> Bool
@@ -12,7 +13,7 @@ nonemptyPal word =
 
 verbose :: String -> String
 verbose word
-    | a == Nothing    = "We need some input."
+    | isNothing a     = "We need some input."
     | a == Just True  = "W00T! Palindromitic effect in play!"
     | a == Just False = "Nice string, but it's not a palindrome."
     where a = nonemptyPal word
