@@ -15,22 +15,13 @@ isPalindrome word =
 
 isPalindromePhrase :: String -> Bool
 isPalindromePhrase phrase =
-    isPalindrome $ myFilter notSpace phrase
+    isPalindrome $ filter notSpace phrase
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
 
 notPunctuation :: Char -> Bool
 notPunctuation char = not $ isPunctuation char
-
-myFilter :: (Char -> Bool) -> String -> String
-myFilter predicate string =
-    case string of
-        [] -> []
-        first : remainder ->
-            if predicate first
-            then  first : myFilter predicate remainder
-            else myFilter predicate remainder
 
 withoutChar :: Char -> String -> String
 withoutChar char phrase =
