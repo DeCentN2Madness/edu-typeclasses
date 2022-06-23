@@ -8,11 +8,11 @@ isPalindrome word =
 
 isPalindromePhrase :: String -> Bool
 isPalindromePhrase phrase =
-    isPalindrome $ withoutSpaces phrase
+    isPalindrome $ myFilter notSpace phrase
 
-withoutSpaces :: String -> String
+{- withoutSpaces :: String -> String
 withoutSpaces =
-    myFilter notSpace
+    myFilter notSpace -}
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
