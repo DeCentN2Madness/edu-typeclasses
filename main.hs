@@ -40,7 +40,7 @@ verbose word =
 verbose' :: String -> String
 verbose' word
     | isNothing a     = "We need some input."
-    | a == Just True  = "W00T! Palindromitic effect in play!"
+    | a == Just True  = "W00T! Palindromitic effect in play, so let thee henceforth know the sons of Palindrome to be Palindromite!"
     | a == Just False = "Nice string, but it's not a palindrome."
     where a = nonemptyPal word
 
