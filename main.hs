@@ -2,6 +2,13 @@ import Data.Char  ( toLower )
 import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
+main :: IO ()
+main = do
+    putStr "Give me a word: "
+    hFlush stdout
+    word <- getLine
+    print $ verbose word
+
 isPalindrome :: String -> Bool
 isPalindrome word =
     word == reverse word
@@ -70,10 +77,3 @@ myTail xs =
 isPalindromeIgnoringCase :: String -> Bool
 isPalindromeIgnoringCase word =
     isPalindrome $ allLowerCase word
-
-main :: IO ()
-main = do
-    putStr "Give me a word: "
-    hFlush stdout
-    word <- getLine
-    print $ verbose word
