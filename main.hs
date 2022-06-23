@@ -53,15 +53,6 @@ verbose' word
 allLowerCase :: String -> String
 allLowerCase = map toLower
 
-myHead :: [a] -> a
-myHead (first : rest) = first
-
-myTail :: [a] -> [a]
-myTail xs =
-    case xs of
-        []           -> []
-        first : rest -> rest
-
 isPalindromeIgnoringCase :: String -> Bool
 isPalindromeIgnoringCase word =
     isPalindrome $ allLowerCase word
