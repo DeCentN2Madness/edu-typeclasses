@@ -15,7 +15,7 @@ withoutSpaces phrase =
     myFilter notSpace phrase
 
 notSpace :: Char -> Bool
-notSpace x = not (x == ' ')
+notSpace = (/= ' ')
 
 {-     case phrase of
         []                -> []
