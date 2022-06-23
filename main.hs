@@ -6,6 +6,17 @@ isPalindrome :: String -> Bool
 isPalindrome word =
     word == reverse word
 
+isPalindromePhrase :: String -> Bool
+isPalindromePhrase phrase =
+    isPalindrome $ withoutSpaces phrase
+
+withoutSpaces :: String -> String
+withoutSpaces phrase =
+    case phrase of
+        []                -> []
+        ' ' : remainder   -> withoutSpaces remainder
+        first : remainder -> first : withoutSpaces remainder
+
 nonemptyPal :: String -> Maybe Bool
 nonemptyPal word =
     case word of
@@ -33,7 +44,7 @@ myMap :: (a -> a) -> [a] -> [a]
 myMap func list =
     case list of
         [] -> []
-        (first : rest) -> func first : myMap func rest
+        first : rest -> func first : myMap func rest
 
 myHead :: [a] -> a
 myHead (first : rest) = first
@@ -41,8 +52,8 @@ myHead (first : rest) = first
 myTail :: [a] -> [a]
 myTail xs =
     case xs of
-        []             -> []
-        (first : rest) -> rest
+        []           -> []
+        first : rest -> rest
 
 isPalindromeIgnoringCase :: String -> Bool
 isPalindromeIgnoringCase word =
