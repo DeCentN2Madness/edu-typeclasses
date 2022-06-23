@@ -13,12 +13,15 @@ main = do
 
 verbose :: String -> String
 verbose word =
-    case nonemptyPal word of
+    case isPalindrome word of
         Nothing    -> "Please enter a word."
         Just False -> "Sorry, this is not a palindrome."
         Just True  -> "Yay, it's a palindrome!"
 
 -- definition (aka pure or logic)
+
+isPalindrome :: String -> Maybe Bool
+isPalindrome = undefined
 
 isOwnReverse :: String -> Bool
 isOwnReverse word =
