@@ -17,6 +17,13 @@ withoutSpaces phrase =
         ' ' : remainder   -> withoutSpaces remainder
         first : remainder -> first : withoutSpaces remainder
 
+withoutChar :: Char -> String -> String
+withoutChar char phrase =
+    case phrase of
+        []                -> []
+        char : remainder  -> withoutChar char remainder
+        first : remainder -> first : withoutChar char remainder
+
 nonemptyPal :: String -> Maybe Bool
 nonemptyPal word =
     case word of
