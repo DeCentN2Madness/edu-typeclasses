@@ -60,13 +60,7 @@ verbose' word
     where a = nonemptyPal word
 
 allLowerCase :: String -> String
-allLowerCase = myMap toLower
-
-myMap :: (a -> a) -> [a] -> [a]
-myMap func list =
-    case list of
-        [] -> []
-        first : rest -> func first : myMap func rest
+allLowerCase = map toLower
 
 myHead :: [a] -> a
 myHead (first : rest) = first
