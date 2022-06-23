@@ -17,6 +17,15 @@ withoutSpaces phrase =
         ' ' : remainder   -> withoutSpaces remainder
         first : remainder -> first : withoutSpaces remainder
 
+myFilter :: (Char -> Bool) -> String -> String
+myFilter predicate string =
+    case string of
+        [] -> []
+        first : remainder ->
+            if predicate first
+            then  first : myFilter predicate remainder
+            else myFilter predicate remainder
+
 withoutChar :: Char -> String -> String
 withoutChar char phrase =
     case phrase of
