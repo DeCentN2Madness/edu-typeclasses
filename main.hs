@@ -20,13 +20,13 @@ verbose word =
 
 -- definition (aka pure or logic)
 
-isPalindrome :: String -> Bool
-isPalindrome word =
+isOwnReverse :: String -> Bool
+isOwnReverse word =
     word == reverse word
 
 isPalindromePhrase :: String -> Bool
 isPalindromePhrase phrase =
-    isPalindrome $ filter notSpace phrase
+    isOwnReverse $ filter notSpace phrase
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
@@ -38,11 +38,11 @@ nonemptyPal :: String -> Maybe Bool
 nonemptyPal word =
     case word of
         "" -> Nothing
-        _  -> Just $ isPalindrome word
+        _  -> Just $ isOwnReverse word
 
 allLowerCase :: String -> String
 allLowerCase = map toLower
 
 isPalindromeIgnoringCase :: String -> Bool
 isPalindromeIgnoringCase word =
-    isPalindrome $ allLowerCase word
+    isOwnReverse $ allLowerCase word
