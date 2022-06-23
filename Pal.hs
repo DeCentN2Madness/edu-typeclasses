@@ -32,11 +32,3 @@ isOwnReverseMaybe maybeString =
 isOwnReverse :: String -> Bool
 isOwnReverse word =
     word == reverse word
-
-isPalindromePhrase :: String -> Bool
-isPalindromePhrase phrase =
-    isOwnReverse $ filter notSpace phrase
-
-isPalindromeIgnoringCase :: String -> Bool
-isPalindromeIgnoringCase word =
-    isOwnReverse $ allLowerCase word
