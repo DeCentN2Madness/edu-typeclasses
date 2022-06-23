@@ -2,7 +2,7 @@ import Data.Char  ( toLower, isPunctuation )
 import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
--- interactivity
+-- interactivity (aka IO or behavior)
 
 main :: IO ()
 main = do
@@ -18,7 +18,7 @@ verbose word =
         Just False -> "Sorry, this is not a palindrome."
         Just True  -> "Yay, it's a palindrome!"
 
--- definition
+-- definition (aka pure or logic)
 
 isPalindrome :: String -> Bool
 isPalindrome word =
