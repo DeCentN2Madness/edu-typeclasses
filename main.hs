@@ -2,12 +2,23 @@ import Data.Char  ( toLower, isPunctuation )
 import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
+-- interactivity
+
 main :: IO ()
 main = do
     putStr "Give me a word: "
     hFlush stdout
     word <- getLine
     print $ verbose word
+
+verbose :: String -> String
+verbose word =
+    case nonemptyPal word of
+        Nothing    -> "Please enter a word."
+        Just False -> "Sorry, this is not a palindrome."
+        Just True  -> "Yay, it's a palindrome!"
+
+-- definition
 
 isPalindrome :: String -> Bool
 isPalindrome word =
@@ -28,13 +39,6 @@ nonemptyPal word =
     case word of
         "" -> Nothing
         _  -> Just $ isPalindrome word
-
-verbose :: String -> String
-verbose word =
-    case nonemptyPal word of
-        Nothing    -> "Please enter a word."
-        Just False -> "Sorry, this is not a palindrome."
-        Just True  -> "Yay, it's a palindrome!"
 
 allLowerCase :: String -> String
 allLowerCase = map toLower
