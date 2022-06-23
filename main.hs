@@ -1,4 +1,4 @@
-import Data.Char  ( toLower )
+import Data.Char  ( toLower, isPunctuation )
 import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
@@ -19,6 +19,9 @@ isPalindromePhrase phrase =
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
+
+notPunctuation :: Char -> Bool
+notPunctuation char = not $ isPunctuation char
 
 myFilter :: (Char -> Bool) -> String -> String
 myFilter predicate string =
