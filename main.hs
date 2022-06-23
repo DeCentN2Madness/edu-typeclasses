@@ -10,4 +10,4 @@ myAll :: (a -> Bool) -> [a] -> Bool
 myAll pred = foldr (\ x y -> pred x && y) True
 
 myAlpha :: Char -> Bool
-myAlpha c = elem c ['a'..'z'] || elem c ['A'..'Z']
+myAlpha c = elem c ['A'..'z'] && notElem c "[\\]^_`"
