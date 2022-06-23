@@ -7,11 +7,13 @@ rejectNonalphabetic string =
         True  -> Just string
 
 myAll :: (a -> Bool) -> [a] -> Bool
-myAll _ [] = True
+myAll pred = foldr (\ x y -> pred x && y) True
+
+{- myAll _ [] = True
 myAll pred (x:xs) =
     case pred x of
         False -> False
-        True -> myAll pred xs
+        True -> myAll pred xs -}
 
 myAny :: (a -> Bool) -> [a] -> Bool
 myAny _ [] = False
