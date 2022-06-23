@@ -11,8 +11,8 @@ isPalindromePhrase phrase =
     isPalindrome $ withoutSpaces phrase
 
 withoutSpaces :: String -> String
-withoutSpaces phrase =
-    myFilter notSpace phrase
+withoutSpaces =
+    myFilter notSpace
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
