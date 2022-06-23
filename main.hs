@@ -12,10 +12,15 @@ isPalindromePhrase phrase =
 
 withoutSpaces :: String -> String
 withoutSpaces phrase =
-    case phrase of
+    myFilter notSpace phrase
+
+notSpace :: Char -> Bool
+notSpace x = not (x == ' ')
+
+{-     case phrase of
         []                -> []
         ' ' : remainder   -> withoutSpaces remainder
-        first : remainder -> first : withoutSpaces remainder
+        first : remainder -> first : withoutSpaces remainder -}
 
 myFilter :: (Char -> Bool) -> String -> String
 myFilter predicate string =
