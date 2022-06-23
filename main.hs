@@ -1,5 +1,4 @@
 import Data.Char  ( toLower, isPunctuation )
-import Data.Maybe ( isNothing )
 import System.IO  ( hFlush, stdout )
 
 -- interactivity (aka IO or behavior)
