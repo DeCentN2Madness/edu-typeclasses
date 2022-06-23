@@ -3,10 +3,10 @@ module Pal where
 import Data.Char  ( toLower, isPunctuation )
 
 isPalindrome :: String -> Maybe Bool
-isPalindrome string = isOwnReverseMaybe $ rejectEmpty $ normalize string
+isPalindrome = isOwnReverseMaybe . rejectEmpty . normalize
 
 normalize :: String -> String
-normalize string = filter notSpace $ allLowerCase $ filter notPunctuation string
+normalize = filter notSpace . allLowerCase . filter notPunctuation
 
 notSpace :: Char -> Bool
 notSpace = (/= ' ')
