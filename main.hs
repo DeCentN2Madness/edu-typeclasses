@@ -12,6 +12,4 @@ greetUser record =
 
 rejectNonalphabetic :: String -> Maybe String
 rejectNonalphabetic string =
-    case all isAlpha string of
-        False -> Nothing
-        True  -> Just string
+    if all isAlpha string then Just string else Nothing
