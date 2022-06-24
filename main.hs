@@ -1,4 +1,14 @@
-import Data.Char
+import Data.Char ()
+
+database :: [(Integer, String)]
+database = [(1, "Julie"),
+            (2, "Chris"),
+            (3, "Alonzo"),
+            (4, "Melman")]
+
+greetUser :: Integer -> Maybe String
+greetUser record =
+    fmap ("Hello, " ++) (lookup record database)
 
 rejectNonalphabetic :: String -> Maybe String
 rejectNonalphabetic string =
