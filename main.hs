@@ -16,6 +16,6 @@ rejectNonalphabetic string =
 
 removeSpaces :: String -> Maybe String
 removeSpaces string =
-    case filter (\ x -> not (x == ' ')) string of
+    case filter (/= ' ') string of
         ""     -> Nothing
         result -> Just result
