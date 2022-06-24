@@ -1,4 +1,13 @@
 import Data.Char ( isAlpha )
+import System.IO ( hFlush, stdout )
+
+main :: IO ()
+main = do
+    let records = show $ length database
+        query   = "Which record would you like to access (1-" ++ records ++ ")? "
+    putStr query
+    hFlush stdout
+    getLine >>= (print . greetUser . read)
 
 database :: [(Integer, String)]
 database = [(1, "Julie"),
