@@ -22,6 +22,4 @@ removeSpaces string =
 
 validateLength :: String -> Maybe String
 validateLength string =
-    case length string > 25 of
-        True  -> Nothing
-        False -> Just string
+    if length string > 25 then Nothing else Just string
