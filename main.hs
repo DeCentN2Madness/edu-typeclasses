@@ -13,3 +13,9 @@ greetUser record =
 rejectNonalphabetic :: String -> Maybe String
 rejectNonalphabetic string =
     if all isAlpha string then Just string else Nothing
+
+removeSpaces :: String -> Maybe String
+removeSpaces string =
+    case filter (\ x -> not (x == ' ')) string of
+        ""     -> Nothing
+        result -> Just result
