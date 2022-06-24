@@ -1,4 +1,4 @@
-import Data.Char ()
+import Data.Char ( isAlpha )
 
 database :: [(Integer, String)]
 database = [(1, "Julie"),
