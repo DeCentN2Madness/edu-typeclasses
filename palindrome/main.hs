@@ -5,8 +5,7 @@ main :: IO ()
 main = do
     putStr "Give me a word: "
     hFlush stdout
-    word <- getLine
-    print $ verbose word
+    getLine >>= (print . verbose)
 
 verbose :: String -> String
 verbose word =
