@@ -19,3 +19,9 @@ removeSpaces string =
     case filter (/= ' ') string of
         ""     -> Nothing
         result -> Just result
+
+validateLength :: String -> Maybe String
+validateLength string =
+    case length string > 25 of
+        True  -> Nothing
+        False -> Just string
