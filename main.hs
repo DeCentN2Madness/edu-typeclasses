@@ -23,3 +23,7 @@ removeSpaces string =
 validateLength :: String -> Maybe String
 validateLength string =
     if length string > 25 then Nothing else Just string
+
+makeUsername :: String -> Maybe String
+makeUsername string =
+    removeSpaces string >>= rejectNonalphabetic >>= validateLength
