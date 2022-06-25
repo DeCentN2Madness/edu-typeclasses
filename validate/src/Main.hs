@@ -30,7 +30,6 @@ stripSpace (x:xs) =
     False -> Just (x:xs)
 
 checkPassword :: String -> Maybe String
-checkPassword "" = Nothing
 checkPassword xs =
   case stripSpace xs of
     Nothing -> Nothing
