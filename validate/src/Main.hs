@@ -34,10 +34,10 @@ checkPassword "" = Nothing
 checkPassword xs =
   case stripSpace xs of
     Nothing -> Nothing
-    Just xs ->
-      case allAlpha xs of
+    Just xs' ->
+      case allAlpha xs' of
         Nothing -> Nothing
-        Just xs ->
-          case maxLength xs of
+        Just xs' ->
+          case maxLength xs' of
             Nothing -> Nothing
-            Just xs -> Just xs
+            Just xs' -> Just xs'
