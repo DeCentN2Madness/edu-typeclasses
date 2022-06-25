@@ -4,7 +4,7 @@ import Data.Char (isAlphaNum)
 
 main :: IO ()
 main = do
-  putStrLn "Please enter a password"
+  putStr "Please enter a password: "
   password <- getLine
   print (allAlpha password)
 
