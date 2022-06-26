@@ -6,7 +6,10 @@ main :: IO ()
 main = do
   putStr "Please enter a password: "
   password <- getLine
-  print (checkPassword password)
+  print (validatePassword password)
+
+validatePassword :: String -> Maybe String
+validatePassword pass = stripSpace pass >>= maxLength >>= allAlpha
 
 maxLength :: String -> Maybe String
 maxLength "" = Nothing
