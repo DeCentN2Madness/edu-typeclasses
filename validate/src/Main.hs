@@ -19,9 +19,7 @@ maxLength xs =
 allAlpha :: String -> Maybe String
 allAlpha "" = Nothing
 allAlpha xs =
-  case all isAlphaNum xs of
-    False -> Nothing
-    True  -> Just xs
+  if all isAlphaNum xs then Just xs else Nothing
 
 stripSpace :: String -> Maybe String
 stripSpace "" = Nothing
