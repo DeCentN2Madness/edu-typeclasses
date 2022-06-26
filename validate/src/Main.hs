@@ -26,6 +26,9 @@ stripSpace "" = Nothing
 stripSpace (x:xs) =
   if isSpace x then stripSpace xs else Just (x:xs)
 
+{-------------------------
+-- here be deprecated code
+
 checkPassword :: String -> Maybe String
 checkPassword xs =
   case stripSpace xs of
@@ -49,3 +52,4 @@ checkPasswd pass =
           case maxLength pass' of
             Nothing    -> "password too long"
             Just pass' -> pass'
+-}
