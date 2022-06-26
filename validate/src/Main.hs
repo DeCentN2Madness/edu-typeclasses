@@ -1,6 +1,8 @@
 module Main where
 
 import Data.Char (isAlphaNum, isSpace)
+import Data.Semigroup
+import Data.Validation
 
 newtype Password =
   Password String deriving (Eq, Show)
