@@ -11,6 +11,9 @@ newtype Error =
 newtype Username =
   Username String deriving (Eq, Show)
 
+instance Semigroup Error where
+  Error xs <> Error ys = Error $ xs <> ys
+
 data User = User Username Password
   deriving (Eq, Show)
 
