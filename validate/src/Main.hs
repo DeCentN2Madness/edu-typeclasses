@@ -2,6 +2,13 @@ module Main where
 
 import Data.Char (isAlphaNum, isSpace)
 
+newtype Password =
+  Password String deriving (Eq, Show)
+newtype Error =
+  Error String deriving (Eq, Show)
+newtype Username =
+  Username String deriving (Eq, Show)
+
 main :: IO ()
 main = do
   putStr "Please enter a password: "
