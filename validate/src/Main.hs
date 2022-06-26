@@ -35,12 +35,12 @@ usernameLength xs =
     then Left $ Error "username must be less than 15 characters"
     else Right $ Username xs
 
-allAlpha :: String -> Either String String
-allAlpha "" = Left "empty password not allowed"
+allAlpha :: String -> Either Error String
+allAlpha "" = Left $ Error "empty password not allowed"
 allAlpha xs =
   if all isAlphaNum xs
     then Right xs
-    else Left "white space and special characters not allowed"
+    else Left $ Error "white space and special characters not allowed"
 
 stripSpace :: String -> Either String String
 stripSpace "" = Left "empty password not allowed"
