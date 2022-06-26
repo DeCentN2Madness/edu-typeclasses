@@ -8,23 +8,29 @@ main = do
   password <- getLine
   print (validatePassword password)
 
-validatePassword :: String -> Maybe String
+validatePassword :: String -> Either String String
 validatePassword pass = stripSpace pass >>= maxLength >>= allAlpha
 
-maxLength :: String -> Maybe String
-maxLength "" = Nothing
+maxLength :: String -> Either String String
+maxLength "" = Left "empty password not allowed"
 maxLength xs =
-  if length xs > 20 then Nothing else Just xs
+  if length xs > 20
+    then Left "must be less than 20 characters"
+    else Right xs
 
-allAlpha :: String -> Maybe String
-allAlpha "" = Nothing
+allAlpha :: String -> Either String String
+allAlpha "" = Left "empty password not allowed"
 allAlpha xs =
-  if all isAlphaNum xs then Just xs else Nothing
+  if all isAlphaNum xs
+    then Right xs
+    else Left "white space and special characters not allowed"
 
-stripSpace :: String -> Maybe String
-stripSpace "" = Nothing
+stripSpace :: String -> Either String String
+stripSpace "" = Left "empty password not allowed"
 stripSpace (x:xs) =
-  if isSpace x then stripSpace xs else Just (x:xs)
+  if isSpace x
+    then stripSpace xs
+    else Right (x:xs)
 
 {-------------------------
 -- here be deprecated code
