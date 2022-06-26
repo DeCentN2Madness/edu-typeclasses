@@ -42,8 +42,8 @@ allAlpha xs =
     then Right xs
     else Left $ Error "white space and special characters not allowed"
 
-stripSpace :: String -> Either String String
-stripSpace "" = Left "empty password not allowed"
+stripSpace :: String -> Either Error String
+stripSpace "" = Left $ Error "empty password not allowed"
 stripSpace (x:xs) =
   if isSpace x
     then stripSpace xs
