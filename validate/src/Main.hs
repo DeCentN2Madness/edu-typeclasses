@@ -24,9 +24,7 @@ allAlpha xs =
 stripSpace :: String -> Maybe String
 stripSpace "" = Nothing
 stripSpace (x:xs) =
-  case isSpace x of
-    True  -> stripSpace xs
-    False -> Just (x:xs)
+  if isSpace x then stripSpace xs else Just (x:xs)
 
 checkPassword :: String -> Maybe String
 checkPassword xs =
