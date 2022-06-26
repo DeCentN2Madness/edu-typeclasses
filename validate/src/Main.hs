@@ -29,6 +29,10 @@ passwordLength xs =
     then Left $ Error "password must be less than 20 characters"
     else Right $ Password xs
 
+validateUsername :: Username -> Either Error Username
+validateUsername (Username name) =
+  stripSpace name >>= allAlpha >>= usernameLength
+
 usernameLength :: String -> Either Error Username
 usernameLength "" = Left $ Error "empty username not allowed"
 usernameLength xs =
