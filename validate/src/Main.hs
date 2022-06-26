@@ -28,6 +28,13 @@ passwordLength xs =
     then Left $ Error "password must be less than 20 characters"
     else Right $ Password xs
 
+usernameLength :: String -> Either Error Username
+usernameLength "" = Left $ Error "empty username not allowed"
+usernameLength xs =
+  if length xs > 15
+    then Left $ Error "username must be less than 15 characters"
+    else Right $ Username xs
+
 allAlpha :: String -> Either String String
 allAlpha "" = Left "empty password not allowed"
 allAlpha xs =
