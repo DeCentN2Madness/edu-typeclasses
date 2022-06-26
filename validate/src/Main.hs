@@ -53,31 +53,3 @@ stripSpace (x:xs) =
   if isSpace x
     then stripSpace xs
     else Right (x:xs)
-
-{-------------------------
--- here be deprecated code
-
-checkPassword :: String -> Maybe String
-checkPassword xs =
-  case stripSpace xs of
-    Nothing -> Nothing
-    Just xs' ->
-      case allAlpha xs' of
-        Nothing -> Nothing
-        Just xs' ->
-          case maxLength xs' of
-            Nothing -> Nothing
-            Just xs' -> Just xs'
-
-checkPasswd :: String -> String
-checkPasswd pass =
-  case stripSpace pass of
-    Nothing    -> "empty password not allowed"
-    Just pass' ->
-      case allAlpha pass' of
-        Nothing    -> "white space and special characters not allowed"
-        Just pass' ->
-          case maxLength pass' of
-            Nothing    -> "password too long"
-            Just pass' -> pass'
--}
