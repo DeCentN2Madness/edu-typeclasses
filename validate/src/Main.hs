@@ -14,9 +14,7 @@ validatePassword pass = stripSpace pass >>= maxLength >>= allAlpha
 maxLength :: String -> Maybe String
 maxLength "" = Nothing
 maxLength xs =
-  case (length xs > 20) of
-    True -> Nothing
-    False -> Just xs
+  if length xs > 20 then Nothing else Just xs
 
 allAlpha :: String -> Maybe String
 allAlpha "" = Nothing
