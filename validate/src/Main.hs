@@ -21,12 +21,12 @@ main = do
 validatePassword :: String -> Either String String
 validatePassword pass = stripSpace pass >>= maxLength >>= allAlpha
 
-maxLength :: String -> Either String String
-maxLength "" = Left "empty password not allowed"
-maxLength xs =
+passwordLength :: String -> Either Error Password
+passwordLength "" = Left $ Error "empty password not allowed"
+passwordLength xs =
   if length xs > 20
-    then Left "must be less than 20 characters"
-    else Right xs
+    then Left $ Error "password must be less than 20 characters"
+    else Right $ Password xs
 
 allAlpha :: String -> Either String String
 allAlpha "" = Left "empty password not allowed"
