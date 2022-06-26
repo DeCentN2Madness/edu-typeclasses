@@ -18,8 +18,9 @@ main = do
   password <- getLine
   print (validatePassword password)
 
-validatePassword :: String -> Either String String
-validatePassword pass = stripSpace pass >>= maxLength >>= allAlpha
+validatePassword :: Password -> Either Error Password
+validatePassword (Password pass) =
+  stripSpace pass >>= allAlpha >>= passwordLength
 
 passwordLength :: String -> Either Error Password
 passwordLength "" = Left $ Error "empty password not allowed"
