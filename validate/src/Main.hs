@@ -15,7 +15,7 @@ data User = User Username Password
 main :: IO ()
 main = do
   putStr "Please enter a password: "
-  password <- getLine
+  password <- Password <$> getLine
   print (validatePassword password)
 
 validatePassword :: Password -> Either Error Password
