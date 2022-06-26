@@ -16,9 +16,9 @@ main :: IO ()
 main = do
   putStr "Please enter a username: "
   username <- Username <$> getLine
-  print $ validateUsername username
   putStr "Please enter a password: "
   password <- Password <$> getLine
+  print $ validateUsername username
   print $ validatePassword password
 
 validatePassword :: Password -> Either Error Password
