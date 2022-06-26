@@ -9,6 +9,9 @@ newtype Error =
 newtype Username =
   Username String deriving (Eq, Show)
 
+data User = User Username Password
+  deriving (Eq, Show)
+
 main :: IO ()
 main = do
   putStr "Please enter a password: "
