@@ -40,3 +40,15 @@ checkPassword xs =
           case maxLength xs' of
             Nothing -> Nothing
             Just xs' -> Just xs'
+
+checkPasswd :: String -> String
+checkPasswd pass =
+  case stripSpace pass of
+    Nothing    -> "empty password not allowed"
+    Just pass' ->
+      case allAlpha pass' of
+        Nothing    -> "white space and special characters not allowed"
+        Just pass' ->
+          case maxLength pass' of
+            Nothing    -> "password too long"
+            Just pass' -> pass'
