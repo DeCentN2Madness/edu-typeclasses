@@ -27,7 +27,13 @@ main = do
 
 makeUser :: Username -> Password -> Validation Error User
 makeUser name pass =
-  User <$> validateUsername name <*> validatePassword pass
+  User <$> usernameErrors name <*> passwordErrors pass
+
+passwordErrors :: Password -> Validation Error Password
+passwordErrors pass =
+  case validatePassword pass of
+    Failure err -> Failure $ Error ["Invalid password: "] <> err
+    Success pass -> Success pass
 
 validatePassword :: Password -> Validation Error Password
 validatePassword (Password pass) =
@@ -42,6 +48,12 @@ passwordLength xs =
   if length xs > 20
     then Failure $ Error ["password must be less than 20 characters"]
     else Success $ Password xs
+
+usernameErrors :: Username -> Validation Error Username
+usernameErrors name =
+  case validateUsername name of
+    Failure err -> Failure $ Error ["Invalid username: "] <> err
+    Success name -> Success name
 
 validateUsername :: Username -> Validation Error Username
 validateUsername (Username name) =
