@@ -55,14 +55,14 @@ usernameLength xs =
     else Success $ Username xs
 
 allAlpha :: String -> Validation Error String
-allAlpha "" = Failure $ Error ["empty password not allowed"]
+allAlpha "" = Failure $ Error ["empty input not allowed"]
 allAlpha xs =
   if all isAlphaNum xs
     then Success xs
     else Failure $ Error ["white space and special characters not allowed"]
 
 stripSpace :: String -> Validation Error String
-stripSpace "" = Failure $ Error ["empty password not allowed"]
+stripSpace "" = Failure $ Error ["empty input not allowed"]
 stripSpace (x:xs) =
   if isSpace x
     then stripSpace xs
