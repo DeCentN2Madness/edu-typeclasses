@@ -1,55 +1,72 @@
 module Main where
 
 import Data.Char (isAlphaNum, isSpace)
+import Data.Semigroup
+import Data.Validation
 
 newtype Password =
   Password String deriving (Eq, Show)
 newtype Error =
-  Error String deriving (Eq, Show)
+  Error [String] deriving (Eq, Show)
 newtype Username =
   Username String deriving (Eq, Show)
+
+instance Semigroup Error where
+  Error xs <> Error ys = Error $ xs <> ys
 
 data User = User Username Password
   deriving (Eq, Show)
 
 main :: IO ()
 main = do
+  putStr "Please enter a username: "
+  username <- Username <$> getLine
   putStr "Please enter a password: "
   password <- Password <$> getLine
-  print $ validatePassword password
+  print $ makeUser username password
 
-validatePassword :: Password -> Either Error Password
+makeUser :: Username -> Password -> Validation Error User
+makeUser name pass =
+  User <$> validateUsername name <*> validatePassword pass
+
+validatePassword :: Password -> Validation Error Password
 validatePassword (Password pass) =
-  stripSpace pass >>= allAlpha >>= passwordLength
+  case stripSpace pass of
+    Failure err   -> Failure err
+    Success pass' ->
+      allAlpha pass' *> passwordLength pass'
 
-passwordLength :: String -> Either Error Password
-passwordLength "" = Left $ Error "empty password not allowed"
+passwordLength :: String -> Validation Error Password
+passwordLength "" = Failure $ Error ["empty password not allowed"]
 passwordLength xs =
   if length xs > 20
-    then Left $ Error "password must be less than 20 characters"
-    else Right $ Password xs
+    then Failure $ Error ["password must be less than 20 characters"]
+    else Success $ Password xs
 
-validateUsername :: Username -> Either Error Username
+validateUsername :: Username -> Validation Error Username
 validateUsername (Username name) =
-  stripSpace name >>= allAlpha >>= usernameLength
+  case stripSpace name of
+    Failure err   -> Failure err
+    Success name' ->
+      allAlpha name' *> usernameLength name'
 
-usernameLength :: String -> Either Error Username
-usernameLength "" = Left $ Error "empty username not allowed"
+usernameLength :: String -> Validation Error Username
+usernameLength "" = Failure $ Error ["empty username not allowed"]
 usernameLength xs =
   if length xs > 15
-    then Left $ Error "username must be less than 15 characters"
-    else Right $ Username xs
+    then Failure $ Error ["username must be less than 15 characters"]
+    else Success $ Username xs
 
-allAlpha :: String -> Either Error String
-allAlpha "" = Left $ Error "empty password not allowed"
+allAlpha :: String -> Validation Error String
+allAlpha "" = Failure $ Error ["empty input not allowed"]
 allAlpha xs =
   if all isAlphaNum xs
-    then Right xs
-    else Left $ Error "white space and special characters not allowed"
+    then Success xs
+    else Failure $ Error ["white space and special characters not allowed"]
 
-stripSpace :: String -> Either Error String
-stripSpace "" = Left $ Error "empty password not allowed"
+stripSpace :: String -> Validation Error String
+stripSpace "" = Failure $ Error ["empty input not allowed"]
 stripSpace (x:xs) =
   if isSpace x
     then stripSpace xs
-    else Right (x:xs)
+    else Success (x:xs)
