@@ -23,8 +23,11 @@ main = do
   username <- Username <$> getLine
   putStr "Please enter a password: "
   password <- Password <$> getLine
-  print $ validateUsername username
-  print $ validatePassword password
+  print $ makeUser username password
+
+makeUser :: Username -> Password -> Validation Error User
+makeUser name pass =
+  User <$> validateUsername name <*> validatePassword pass
 
 validatePassword :: Password -> Validation Error Password
 validatePassword (Password pass) =
