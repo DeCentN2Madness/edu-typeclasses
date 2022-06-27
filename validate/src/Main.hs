@@ -4,18 +4,14 @@ import Data.Char (isAlphaNum, isSpace)
 import Data.Semigroup
 import Data.Validation
 
-newtype Password =
-  Password String deriving (Eq, Show)
-newtype Error =
-  Error [String] deriving (Eq, Show)
-newtype Username =
-  Username String deriving (Eq, Show)
+newtype Username = Username String            deriving (Eq, Show)
+newtype Password = Password String            deriving (Eq, Show)
+newtype Error    = Error [String]             deriving (Eq, Show)
+
+data    User     = User Username Password     deriving (Eq, Show)
 
 instance Semigroup Error where
   Error xs <> Error ys = Error $ xs <> ys
-
-data User = User Username Password
-  deriving (Eq, Show)
 
 main :: IO ()
 main = do
