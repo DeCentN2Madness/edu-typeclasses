@@ -24,12 +24,15 @@ main = do
 display :: Username -> Password -> IO ()
 display name pass =
   case makeUser name pass of
-    Failure (Error err) -> putStrLn $ unlines err
+    Failure err -> putStrLn $ unlines $ errorCoerce err
     Success (User (Username name) pass) -> putStrLn $ "Welcome, " ++ name
 
 makeUser :: Username -> Password -> Validation Error User
 makeUser name pass =
   User <$> usernameErrors name <*> passwordErrors pass
+
+errorCoerce :: Error -> [String]
+errorCoerce (Error err) = err
 
 passwordErrors :: Password -> Validation Error Password
 passwordErrors pass =
