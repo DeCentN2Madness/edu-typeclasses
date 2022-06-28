@@ -19,7 +19,7 @@ main = do
   username <- Username <$> getLine
   putStr "Please enter a password: "
   password <- Password <$> getLine
-  print $ makeUser username password
+  display username password
 
 display :: Username -> Password -> IO ()
 display name pass =
