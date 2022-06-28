@@ -1,8 +1,8 @@
 module Main where
 
-import Data.Char (isAlphaNum, isSpace)
-import Data.Semigroup
-import Data.Validation
+import Data.Char       ( isAlphaNum, isSpace )
+import Data.Semigroup  ( (<>) )
+import Data.Validation ( Validation(..) )
 
 newtype Username = Username String            deriving (Eq, Show)
 newtype Password = Password String            deriving (Eq, Show)
