@@ -34,9 +34,6 @@ makeUser :: Username -> Password -> Validation Error User
 makeUser name pass =
   User <$> usernameErrors name <*> passwordErrors pass
 
-errorCoerce :: Error -> [String]
-errorCoerce (Error err) = err
-
 passwordErrors :: Password -> Validation Error Password
 passwordErrors pass =
   case validatePassword pass of
