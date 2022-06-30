@@ -1,3 +1,4 @@
+{-# LANGUAGE TypeApplications #-}
 module Main where
 
 import Data.Char       ( isAlphaNum, isSpace )
@@ -26,7 +27,8 @@ display :: Username -> Password -> IO ()
 display name pass =
   case makeUser name pass of
     Failure err -> putStrLn $ unlines $ coerce err
-    Success (User name pass) -> putStrLn $ "Welcome, " ++ coerce name
+    Success (User name pass) ->
+      putStrLn $ "Welcome, " ++ coerce @Username @String name
 
 makeUser :: Username -> Password -> Validation Error User
 makeUser name pass =
