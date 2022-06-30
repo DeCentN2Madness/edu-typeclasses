@@ -12,6 +12,8 @@ newtype Error    = Error [String]             deriving (Eq, Show)
 
 data    User     = User Username Password     deriving (Eq, Show)
 
+type    Rule a   = a -> Validation Error a
+
 instance Semigroup Error where
   Error xs <> Error ys = Error $ xs <> ys
 
@@ -34,18 +36,19 @@ makeUser :: Username -> Password -> Validation Error User
 makeUser name pass =
   User <$> usernameErrors name <*> passwordErrors pass
 
-passwordErrors :: Password -> Validation Error Password
+passwordErrors :: Rule Password
 passwordErrors pass =
   case validatePassword pass of
     Failure err -> Failure $ Error ["Invalid password: "] <> err
     Success pass -> Success pass
 
-validatePassword :: Password -> Validation Error Password
-validatePassword (Password pass) =
-  case stripSpace pass of
+validatePassword :: Rule Password
+validatePassword pass =
+  case (coerce stripSpace :: Rule Password) pass of
     Failure err   -> Failure err
     Success pass' ->
-      allAlpha pass' *> passwordLength pass'
+      (coerce allAlpha :: Rule Password) pass' *>
+      (coerce passwordLength :: Rule Password) pass'
 
 passwordLength :: String -> Validation Error Password
 passwordLength "" = Failure $ Error ["empty password not allowed"]
@@ -54,13 +57,13 @@ passwordLength xs =
     then Failure $ Error ["password must be less than 20 characters"]
     else Success $ Password xs
 
-usernameErrors :: Username -> Validation Error Username
+usernameErrors :: Rule Username
 usernameErrors name =
   case validateUsername name of
     Failure err -> Failure $ Error ["Invalid username: "] <> err
     Success name -> Success name
 
-validateUsername :: Username -> Validation Error Username
+validateUsername :: Rule Username
 validateUsername (Username name) =
   case stripSpace name of
     Failure err   -> Failure err
@@ -74,14 +77,14 @@ usernameLength xs =
     then Failure $ Error ["username must be less than 15 characters"]
     else Success $ Username xs
 
-allAlpha :: String -> Validation Error String
+allAlpha :: Rule String
 allAlpha "" = Failure $ Error ["empty input not allowed"]
 allAlpha xs =
   if all isAlphaNum xs
     then Success xs
     else Failure $ Error ["white space and special characters not allowed"]
 
-stripSpace :: String -> Validation Error String
+stripSpace :: Rule String
 stripSpace "" = Failure $ Error ["empty input not allowed"]
 stripSpace (x:xs) =
   if isSpace x
